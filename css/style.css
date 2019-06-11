@@ -343,16 +343,18 @@ h1, h2, h3, h4, h5, h6, figure {
     margin: 0 auto;
   }
 }
+/* color Button */
 #fh5co-header .display-tc .btn.btn-learn,
 .fh5co-cover .display-tc .btn.btn-learn {
-  background: #fee856;
+  background: #fee856; 
   border: none;
   color: #000 !important;
 }
+/* color Hoover button*/
 #fh5co-header .display-tc .btn.btn-learn:hover, #fh5co-header .display-tc .btn.btn-learn:focus,
 .fh5co-cover .display-tc .btn.btn-learn:hover,
 .fh5co-cover .display-tc .btn.btn-learn:focus {
-  background: rgba(254, 232, 86, 0.9) !important;
+  background: rgba(63, 236, 213, 0.9) !important;
   color: #000 !important;
 }
 #fh5co-header .display-tc .btn:hover, #fh5co-header .display-tc .btn:focus,
