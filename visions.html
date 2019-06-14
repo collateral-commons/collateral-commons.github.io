@@ -1,0 +1,228 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Collateral Commons &mdash; Visions</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="Plural visions on our technological futures" />
+	<meta name="keywords" content="technology, AI, collective, common good, utopia, vision, participative, speculative" />
+	<meta name="author" content="Sod" />
+
+
+
+  	<!-- Facebook and Twitter integration -->
+	<meta property="og:title" content=""/>
+	<meta property="og:image" content=""/>
+	<meta property="og:url" content=""/>
+	<meta property="og:site_name" content=""/>
+	<meta property="og:description" content=""/>
+	<meta name="twitter:title" content="" />
+	<meta name="twitter:image" content="" />
+	<meta name="twitter:url" content="" />
+	<meta name="twitter:card" content="" />
+
+	<!-- <link href="https://fonts.googleapis.com/css?family=Work+Sans:300,400,500,700,800" rel="stylesheet">	 -->
+	<link href="https://fonts.googleapis.com/css?family=Inconsolata:400,700" rel="stylesheet">
+	
+	<!-- Animate.css -->
+	<link rel="stylesheet" href="css/animate.css">
+	<!-- Icomoon Icon Fonts-->
+	<link rel="stylesheet" href="css/icomoon.css">
+	<!-- Bootstrap  -->
+	<link rel="stylesheet" href="css/bootstrap.css">
+	<!-- Flexslider  -->
+	<link rel="stylesheet" href="css/flexslider.css">
+
+	<!-- Theme style  -->
+	<link rel="stylesheet" href="css/style.css">
+
+	<!-- Modernizr JS -->
+	<script src="js/modernizr-2.6.2.min.js"></script>
+	<!-- FOR IE9 below -->
+	<!--[if lt IE 9]>
+	<script src="js/respond.min.js"></script>
+	<![endif]-->
+
+
+
+    <script>
+
+/* =======================================================
+*For modal boxes
+*
+* ======================================================= */
+
+
+/* =======================================================
+*For writing and erasing textJAVASCRIPT, PUT it ELSEWHERE For writing and erasing text other way
+*
+* ======================================================= */
+
+var TxtRotate = function(el, toRotate, period) {
+  this.toRotate = toRotate;
+  this.el = el;
+  this.loopNum = 0;
+  this.period = parseInt(period, 10) || 2000;
+  this.txt = '';
+  this.tick();
+  this.isDeleting = false;
+};
+
+TxtRotate.prototype.tick = function() {
+  var i = this.loopNum % this.toRotate.length;
+  var fullTxt = this.toRotate[i];
+
+  if (this.isDeleting) {
+    this.txt = fullTxt.substring(0, this.txt.length - 1);
+  } else {
+    this.txt = fullTxt.substring(0, this.txt.length + 1);
+  }
+
+  this.el.innerHTML = '<span class="wrap">'+this.txt+'</span>';
+
+  var that = this;
+  var delta = 300 - Math.random() * 100;
+
+  if (this.isDeleting) { delta /= 2; }
+
+  if (!this.isDeleting && this.txt === fullTxt) {
+    delta = this.period;
+    this.isDeleting = true;
+  } else if (this.isDeleting && this.txt === '') {
+    this.isDeleting = false;
+    this.loopNum++;
+    delta = 500;
+  }
+
+  setTimeout(function() {
+    that.tick();
+  }, delta);
+};
+
+window.onload = function() {
+  var elements = document.getElementsByClassName('txt-rotate');
+  for (var i=0; i<elements.length; i++) {
+    var toRotate = elements[i].getAttribute('data-rotate');
+    var period = elements[i].getAttribute('data-period');
+    if (toRotate) {
+      new TxtRotate(elements[i], JSON.parse(toRotate), period);
+    }
+  }
+  // INJECT CSS
+  var css = document.createElement("style");
+  css.type = "text/css";
+  css.innerHTML = ".txt-rotate > .wrap { border-right: 0.08em solid #666 }";
+  document.body.appendChild(css);
+};
+    </script>
+
+
+
+	</head>
+	<body>
+
+
+    <div class="fh5co-loader"></div>
+	
+	<div id="page">
+            <nav class="fh5co-nav" role="navigation">
+                <div class="top-menu">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-xs-2">
+                                <div id="fh5co-logo"><a href="index.html">sod<span>.</span></a></div>
+                            </div>
+                            <div class="col-xs-10 text-right menu-1">
+                                <ul>
+                                    <li><a href="index.html">Home</a></li>
+                                    <li class="active"><a href="visions.html">Visions</a></li>
+                                    <li><a href="about.html">About</a></li>
+
+                                    
+                                <!--	<li><a href="contact.html">Contact</a></li> -->
+                                </ul>
+                            </div>
+                        </div>
+                        
+                    </div>
+                </div>
+            </nav>
+  
+
+    <div class="display-tc js-fullheight animate-box" data-animate-effect="fadeIn">
+      <p><img style="width:100%; height:580px" src="images/im-1.jpg"></p>
+                                <h1>
+                                    <span
+                                        class="txt-rotate typewr"
+                                        data-period="1000"
+                                        data-rotate='[ "What if it`s more like a symbiotic relationship?", 
+                                        "Seriously, it`s much more than a hairdresser now.", 
+                                        "Certainly I would use it for dangerous and alienating jobs, but also for jobs where the human could be wrong.",
+                                        "I used to have a smart tootthbrush. Well, it didnt last.", 
+                                        "What if AI could give back to humans, humans time?", 
+                                        "Before AI solve something we need to solve ourself, our actions and impact on this planet.",
+                                        "For connection between people, you local neighbour stay for me the first option.",
+                                        "Emotional support. Seems like something than living things should do.",
+                                        "Please AI, I dont want you cook for me.",
+                                        "I invented myself a job since I couldnt conceive a life without job",
+                                        "Somehow, I was afraid of loosing some sort of power and meaning." ]'>
+                                      </span>    
+                            </h1> 
+                            <div class="box4">
+                           
+                            <div class="column4">
+
+                              <a href="vtime.html">
+                                 <!--<img style="width:53%;padding-top: 58px;" src="images/runes1.png" hspace="40">-->
+                              <p style="color:#ea361e;font-size:28px; margin-top: 16px;">.on time</p>
+                            </a>
+              
+                            </div>
+                            <div class="column4">
+
+                              <a href="vyou.html">
+                                 <!--<img style="width:53%;padding-top: 58px;" src="images/runes2.png" hspace="40">-->
+                              <p style="color:#ea361e;font-size:28px; margin-top: 16px;">.and you</p> 
+                            </a>
+
+                            </div>
+                            <div class="column4">
+
+                              <a href="vgood.html">
+                                 <!--<img style="width:53%;padding-top: 58px;" src="images/runes3.png" hspace="40" >-->
+                               
+                              <p style="color:#ea361e;font-size:28px; margin-top: 16px;">.for good</p>
+                             </a>
+
+                            </div>
+                            <div class="column4">
+
+                              <a href="vwithout.html">
+                                <!--<img style="width:53%;padding-top: 58px;" src="images/runes4.png" hspace="40" >-->
+                              <p style="color:#ea361e;font-size:28px; margin-top: 16px;">.without</p> 
+                            </a>
+
+                            </div>
+
+                            </div>
+
+    </div>
+
+
+                  <!-- jQuery -->
+	<script src="js/jquery.min.js"></script>
+	<!-- jQuery Easing -->
+	<script src="js/jquery.easing.1.3.js"></script>
+	<!-- Bootstrap -->
+	<script src="js/bootstrap.min.js"></script>
+	<!-- Waypoints -->
+	<script src="js/jquery.waypoints.min.js"></script>
+	<!-- Flexslider -->
+	<script src="js/jquery.flexslider-min.js"></script>
+	<!-- Main -->
+	<script src="js/main.js"></script>
+
+	</body>
+    </html>
+    
