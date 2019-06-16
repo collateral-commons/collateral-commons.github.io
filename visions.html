@@ -62,7 +62,8 @@
 var TxtRotate = function(el, toRotate, period) {
   this.toRotate = toRotate;
   this.el = el;
-  this.loopNum = 0;
+  this.leng = this.toRotate.length;
+  this.loopNum = Math.floor(Math.random(this.leng));	//initialise randomly
   this.period = parseInt(period, 10) || 2000;
   this.txt = '';
   this.tick();
@@ -82,7 +83,7 @@ TxtRotate.prototype.tick = function() {
   this.el.innerHTML = '<span class="wrap">'+this.txt+'</span>';
 
   var that = this;
-  var delta = 300 - Math.random() * 100;
+  var delta = 100 // - Math.random() * 100;
 
   if (this.isDeleting) { delta /= 2; }
 
@@ -92,7 +93,7 @@ TxtRotate.prototype.tick = function() {
   } else if (this.isDeleting && this.txt === '') {
     this.isDeleting = false;
     this.loopNum++;
-    delta = 500;
+    delta = 40;
   }
 
   setTimeout(function() {
@@ -102,7 +103,9 @@ TxtRotate.prototype.tick = function() {
 
 window.onload = function() {
   var elements = document.getElementsByClassName('txt-rotate');
-  for (var i=0; i<elements.length; i++) {
+  for (var j=0; j<elements.length; j++) {
+    var k =  Math.floor(Math.random(elements.length));
+    var i = j + k % elements.length;
     var toRotate = elements[i].getAttribute('data-rotate');
     var period = elements[i].getAttribute('data-period');
     if (toRotate) {
@@ -155,18 +158,21 @@ window.onload = function() {
                                 <h1>
                                     <span
                                         class="txt-rotate typewr"
-                                        data-period="1000"
+                                        data-period="10"
                                         data-rotate='[ "What if it`s more like a symbiotic relationship?", 
-                                        "Seriously, it`s much more than a hairdresser now.", 
-                                        "Certainly I would use it for dangerous and alienating jobs, but also for jobs where the human could be wrong.",
-                                        "I used to have a smart tootthbrush. Well, it didnt last.", 
-                                        "What if AI could give back to humans, humans time?", 
                                         "Before AI solve something we need to solve ourself, our actions and impact on this planet.",
-                                        "For connection between people, you local neighbour stay for me the first option.",
-                                        "Emotional support. Seems like something than living things should do.",
-                                        "Please AI, I dont want you cook for me.",
-                                        "I invented myself a job since I couldnt conceive a life without job",
-                                        "Somehow, I was afraid of loosing some sort of power and meaning." ]'>
+                                        "Well, yes, AI can write email for you. But what about improving the human condition ?",
+                                        "Emotional support. Doesn`t it sounds like something that living things should do ?",
+                                        "What if AI could give back to humans, humans time? ", 
+                                        "It`s great for dangerous and alienating jobs, but also for jobs where the human can be wrong.",
+                                        "Seriously, it`s much more than a hairdresser now. It`s the social oasis around here.",
+                                        "For meaningful connections between people, your neighbour stay for me the first option.",
+                                        "Please AI, do whatever you want here, but please don`t cook for me.",
+                                        "Education, media and politics seems to me quite sad use of AI. ",
+                                        "AI should solve most of the practical demands of society while not influencig our way to experience the time.",
+                                        "I used to have a smart toothbrush.  It was tracking my gestures and speculating on my personality so well, it didn`t last long.",
+                                        "I ended up inventing myself a job since I couldn`t conceive a life without a job.",
+                                        "Probably, I was afraid of loosing some sort of control and somehow meaning." ]'>
                                       </span>    
                             </h1> 
                             <div class="box4">
