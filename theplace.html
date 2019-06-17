@@ -1,0 +1,234 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Collateral Commons &mdash;The Place</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="Plural visions on our technological futures" />
+	<meta name="keywords" content="technology, AI, collective, common good, utopia, vision, participative, speculative" />
+	<meta name="author" content="Sod" />
+
+
+
+  	<!-- Facebook and Twitter integration -->
+	<meta property="og:title" content=""/>
+	<meta property="og:image" content=""/>
+	<meta property="og:url" content=""/>
+	<meta property="og:site_name" content=""/>
+	<meta property="og:description" content=""/>
+	<meta name="twitter:title" content="" />
+	<meta name="twitter:image" content="" />
+	<meta name="twitter:url" content="" />
+	<meta name="twitter:card" content="" />
+
+	<!-- <link href="https://fonts.googleapis.com/css?family=Work+Sans:300,400,500,700,800" rel="stylesheet">	 -->
+	<link href="https://fonts.googleapis.com/css?family=Inconsolata:400,700" rel="stylesheet">
+	
+	<!-- Animate.css -->
+	<link rel="stylesheet" href="css/animate.css">
+	<!-- Icomoon Icon Fonts-->
+	<link rel="stylesheet" href="css/icomoon.css">
+	<!-- Bootstrap  -->
+	<link rel="stylesheet" href="css/bootstrap.css">
+	<!-- Flexslider  -->
+	<link rel="stylesheet" href="css/flexslider.css">
+
+	<!-- Theme style  -->
+	<link rel="stylesheet" href="css/style.css">
+
+	<!-- Modernizr JS -->
+	<script src="js/modernizr-2.6.2.min.js"></script>
+	<!-- FOR IE9 below -->
+	<!--[if lt IE 9]>
+	<script src="js/respond.min.js"></script>
+	<![endif]-->
+    
+
+
+
+    <canvas id="myCanvas" width="2000" height="1000" style="border:1px solid #d3d3d3;">
+            Your browser does not support the HTML5 canvas tag.</canvas>
+            
+            <script>
+            var mouseX = 0;
+            var mouseY = 0;
+            var talkDot = false;
+            var nearDot = 0;
+            var colors = ['#F03C69', '#FFCD32', '#2BAD5D', '#2ABABF', '#CDDC28', '#B91E8C'];
+            var directions = ['+', '-'];
+            var speeds = [0.1, 0.2, 0.5, 0.8, 0.7, 1];
+            // Start with an empty array of dots.
+            var dots = [];
+            var samples =[];
+            var numDots = 20;
+            var dotRadius = 16;
+                        //Initialise everything randomly apart quotes.
+                        for(var i = 0; i < numDots; i++) {
+                var x = Math.random() * 1800;
+                var y = Math.random() * 800;
+                // Get random color, direction and speed.
+                var color = colors[Math.floor(Math.random() * colors.length)];
+                var xMove = directions[Math.floor(Math.random() * directions.length)];
+                var yMove = directions[Math.floor(Math.random() * directions.length)];
+                var slope = (0.5-Math.random())*2;
+                var speed = speeds[Math.floor(Math.random() * speeds.length)];
+                speed = Math.min(speed*slope, 1)/slope;
+                // Set the object.
+                var dot = {
+                    x: x,
+                    y: y,
+                    radius: dotRadius,
+                    xMove: xMove,
+                    yMove: yMove,
+                    slope : slope,
+                    color: color,
+                    speed: speed
+                };
+                // Save it to the dots array.
+                dots.push(dot);
+                var audio = new Audio('audio.wav');
+                samples.push(audio);
+            }
+
+
+            function nearestDot(mX, mY) {
+                var indexD = 0;
+                var minDist = 10000;
+                for( i = 0; i < dots.length; i++ ) {
+                    var currDist = (mX - dots[i].x)* (mX -dots[i].x) +   (mY-dots[i].y)* (mY -dots[i].y);
+                    if (currDist < minDist) {
+                        indexD = i;
+                        minDist = currDist;
+                    }
+                }
+                nearDot = indexD;
+            }
+
+            function getCursorPosition(canvas, event) {
+                const rect = canvas.getBoundingClientRect()
+                mouseX = event.clientX - rect.left
+                mouseY = event.clientY - rect.top
+                talkDot = true;
+                index = nearestDot(mouseX, mouseY);
+                console.log("x: " + x + " y: " + y)
+            }
+
+            var canvas = document.getElementById("myCanvas");
+         // canvas = document.querySelector('canvas')
+            canvas.addEventListener('mousedown', function(e) {
+                getCursorPosition(canvas, e)
+            })
+
+            var canvasWidth = 2000;
+            var canvasHeight = 1000;
+            var context = canvas.getContext("2d");
+            // Notice in the moveDot function we can make dots go faster if we increment by more than 1 pixel each time.
+            var frameLength = 1;
+            // Draw each dot in the dots array.
+            for( i = 0; i < dots.length; i++ ) {
+            drawDot(dots[i]);
+            };
+            setTimeout(function(){
+            window.requestAnimationFrame(moveDot);
+            }, 2500);
+
+            var timer = 0;
+  
+            function moveDot() {
+
+            timer = timer + 1;
+            if( timer % 10 == 0 ) {
+            context.fillStyle = "#0533f6";
+            context.globalAlpha = 0.1;
+            context.fillRect(0, 0, canvasWidth, canvasHeight)
+            //BOX with text
+            context.globalAlpha = 1;
+            context.strokeStyle = "#fff";
+            context.strokeRect(50,600,320,200);
+            context.strokeRect(50,600,320,280);
+            context.font = "48px Arial";
+            context.fillStyle = "#fff";
+            context.textAlign = "left";
+            context.fillText("The Place", 60, 680); 
+            context.font = "18px Arial";
+            context.fillText("where Collateral Commons happens.", 60, 750); 
+            context.font = "26px Arial";
+            var txtJoin = "Join the place";
+            var linkJoin = "https://www.surveymonkey.de/r/WP99WPV";
+            context.fillText( txtJoin, 60, 850); 
+        }
+            // Iterate over all the dots.
+            for( i = 0; i < dots.length; i++ ) {              
+                if( dots[i].xMove == '+' ) {
+                dots[i].x += dots[i].speed + 0.1*Math.random();
+                } else {
+                dots[i].x -= dots[i].speed+ 0.1*Math.random();
+                }
+                if( dots[i].yMove == '+' ) {
+                dots[i].y +=  dots[i].slope*dots[i].speed+ 0.1*Math.random();
+                } else {
+                dots[i].y -= dots[i].slope*dots[i].speed+ 0.1*Math.random();
+                }
+                drawDot(dots[i])
+                if( (dots[i].x + dots[i].radius) >= canvasWidth ) {
+                dots[i].xMove = '-';
+                }
+                if( (dots[i].x - dots[i].radius) <= 0 ) {
+                dots[i].xMove = '+';
+                }
+                if( (dots[i].y + dots[i].radius) >= canvasHeight ) {
+                dots[i].yMove = '-';
+                }
+                if( (dots[i].y - dots[i].radius) <= 0 ) {
+                dots[i].yMove = '+';
+                }
+            }
+              // Possibly trigger the audio
+              if (talkDot){
+                talkDot = false;
+                samples[nearDot].play();
+                context.clearRect(dots[nearDot].x, dots[nearDot].y, 100, 100);
+            }
+            // Render it again
+            window.requestAnimationFrame(moveDot);
+            }
+
+            function drawDot(dot) {
+            context.globalAlpha = 1;
+            context.beginPath();
+            context.arc(dot.x, dot.y, dot.radius, 0, 2 * Math.PI, false);
+            context.fillStyle = "#fff"; //dot.color;
+            context.fill();
+
+            }
+            </script>
+            
+
+
+
+
+
+
+
+
+
+
+
+
+                  <!-- jQuery -->
+                  <script src="js/jquery.min.js"></script>
+                  <!-- jQuery Easing -->
+                  <script src="js/jquery.easing.1.3.js"></script>
+                  <!-- Bootstrap -->
+                  <script src="js/bootstrap.min.js"></script>
+                  <!-- Waypoints -->
+                  <script src="js/jquery.waypoints.min.js"></script>
+                  <!-- Flexslider -->
+                  <script src="js/jquery.flexslider-min.js"></script>
+                  <!-- Main -->
+                  <script src="js/main.js"></script>
+              
+                  </body>
+                  </html>
+                  
