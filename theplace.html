@@ -24,7 +24,7 @@
 
 	<!-- <link href="https://fonts.googleapis.com/css?family=Work+Sans:300,400,500,700,800" rel="stylesheet">	 -->
 	<link href="https://fonts.googleapis.com/css?family=Inconsolata:400,700" rel="stylesheet">
-	
+	<link href="https://fonts.googleapis.com/css?family=Londrina+Outline&display=swap" rel="stylesheet">
 	<!-- Animate.css -->
 	<link rel="stylesheet" href="css/animate.css">
 	<!-- Icomoon Icon Fonts-->
@@ -62,7 +62,7 @@
             var dots = [];
             var samples =[];
             var numDots = 20;
-            var dotRadius = 16;
+            var dotRadius = 18;
                         //Initialise everything randomly apart quotes.
                         for(var i = 0; i < numDots; i++) {
                 var x = Math.random() * 1800;
@@ -71,9 +71,9 @@
                 var color = colors[Math.floor(Math.random() * colors.length)];
                 var xMove = directions[Math.floor(Math.random() * directions.length)];
                 var yMove = directions[Math.floor(Math.random() * directions.length)];
-                var slope = (0.5-Math.random())*2;
+                var angle = Math.random() * 2 * Math.PI;
                 var speed = speeds[Math.floor(Math.random() * speeds.length)];
-                speed = Math.min(speed*slope, 1)/slope;
+                var speedAngle = 0.01 * (0.5-Math.random());
                 // Set the object.
                 var dot = {
                     x: x,
@@ -81,9 +81,10 @@
                     radius: dotRadius,
                     xMove: xMove,
                     yMove: yMove,
-                    slope : slope,
+                    angle : angle,
                     color: color,
-                    speed: speed
+                    speed: speed,
+                    speedAngle: speedAngle
                 };
                 // Save it to the dots array.
                 dots.push(dot);
@@ -145,30 +146,33 @@
             //BOX with text
             context.globalAlpha = 1;
             context.strokeStyle = "#fff";
-            context.strokeRect(50,500,320,200);
-            context.strokeRect(50,500,320,280);
-            context.font = "48px Arial";
+            context.strokeRect(50,500,300,200);
+            context.strokeRect(50,500,300,280);
+            context.font = "54px Londrina Outline";
             context.fillStyle = "#fff";
             context.textAlign = "left";
-            context.fillText("The Place", 60, 580); 
-            context.font = "18px Arial";
-            context.fillText("where Collateral Commons happens.", 60, 650); 
-            context.font = "26px Arial";
-            var txtJoin = "Join the place";
+            context.fillText("The Place", 60, 570); 
+            context.font = "18px Inconsolata";
+            context.fillText("for plural visions", 60, 610); 
+            context.fillText("of technological futures.", 60, 640); 
+            context.fillText("Participative Experiment.", 60, 670);
+            context.font = "36px Londrina Outline";
+            var txtJoin = "Collateral Commons";
             var linkJoin = "https://www.surveymonkey.de/r/WP99WPV";
             context.fillText( txtJoin, 60, 750); 
         }
             // Iterate over all the dots.
-            for( i = 0; i < dots.length; i++ ) {              
+            for( i = 0; i < dots.length; i++ ) {    
+                dots[i].angle = dots[i].angle + dots[i].speedAngle;  
                 if( dots[i].xMove == '+' ) {
-                dots[i].x += dots[i].speed + 0.1*Math.random();
+                dots[i].x +=  Math.cos(dots[i].angle) * dots[i].speed + 0.1*Math.random();
                 } else {
-                dots[i].x -= dots[i].speed+ 0.1*Math.random();
+                dots[i].x -=  Math.cos(dots[i].angle) * dots[i].speed+ 0.1*Math.random();
                 }
                 if( dots[i].yMove == '+' ) {
-                dots[i].y +=  dots[i].slope*dots[i].speed+ 0.1*Math.random();
+                dots[i].y +=  Math.sin(dots[i].angle) * dots[i].speed+ 0.1*Math.random();
                 } else {
-                dots[i].y -= dots[i].slope*dots[i].speed+ 0.1*Math.random();
+                dots[i].y -= Math.sin(dots[i].angle) * dots[i].speed+ 0.1*Math.random();
                 }
                 drawDot(dots[i])
                 if( (dots[i].x + dots[i].radius) >= canvasWidth ) {
@@ -188,7 +192,9 @@
               if (talkDot){
                 talkDot = false;
                 samples[nearDot].play();
-                context.clearRect(dots[nearDot].x, dots[nearDot].y, 100, 100);
+                context.strokeRect(dots[nearDot].x-10, dots[nearDot].y-10, 80, 80);
+                context.strokeStyle = "#fff"; //dot.color;
+                context.stroke();
             }
             // Render it again
             window.requestAnimationFrame(moveDot);
@@ -199,6 +205,11 @@
             context.beginPath();
             context.arc(dot.x, dot.y, dot.radius, 0, 2 * Math.PI, false);
             context.fillStyle = "#fff"; //dot.color;
+            context.fill();
+            context.beginPath();
+            context.ellipse(dot.x + 4, dot.y + 4, dot.radius/4, dot.radius/5, Math.PI /2, 0,  2 * Math.PI, false);
+            context.ellipse(dot.x - 4, dot.y + 4, dot.radius/4, dot.radius/5, Math.PI /2, 0,  2 * Math.PI, false);
+            context.fillStyle = "#0533f6"; //dot.color;
             context.fill();
 
             }
