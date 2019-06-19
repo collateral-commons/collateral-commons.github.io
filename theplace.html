@@ -124,6 +124,9 @@
             var canvasWidth = 2000;
             var canvasHeight = 1000;
             var context = canvas.getContext("2d");
+            context.fillStyle = "#0533f6";
+            context.globalAlpha = 1;
+            context.fillRect(0, 0, canvasWidth, canvasHeight)
             // Notice in the moveDot function we can make dots go faster if we increment by more than 1 pixel each time.
             var frameLength = 1;
             // Draw each dot in the dots array.
@@ -139,7 +142,7 @@
             function moveDot() {
 
             timer = timer + 1;
-            if( timer % 10 == 0 ) {
+            if( timer % 10 == 1 ) {
             context.fillStyle = "#0533f6";
             context.globalAlpha = 0.1;
             context.fillRect(0, 0, canvasWidth, canvasHeight)
