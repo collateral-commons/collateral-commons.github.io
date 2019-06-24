@@ -24,7 +24,8 @@
 
 	<!-- <link href="https://fonts.googleapis.com/css?family=Work+Sans:300,400,500,700,800" rel="stylesheet">	 -->
 	<link href="https://fonts.googleapis.com/css?family=Inconsolata:400,700" rel="stylesheet">
-	<link href="https://fonts.googleapis.com/css?family=Londrina+Outline&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Londrina+Outline&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Alfa+Slab+One&display=swap" rel="stylesheet"> 
 	<!-- Animate.css -->
 	<link rel="stylesheet" href="css/animate.css">
 	<!-- Icomoon Icon Fonts-->
@@ -43,8 +44,8 @@
 	<!--[if lt IE 9]>
 	<script src="js/respond.min.js"></script>
 	<![endif]-->
-    
 
+        
 
 
     <canvas id="myCanvas" width="2000" height="1000" style="border:1px solid #d3d3d3;">
@@ -54,6 +55,10 @@
             var mouseX = 0;
             var mouseY = 0;
             var talkDot = false;
+            var timeStep = 120;
+            var timerMax = 9 * timeStep;
+            var talkTimer = timerMax;
+            var talkStep = 0
             var nearDot = 0;
             var colors = ['#F03C69', '#FFCD32', '#2BAD5D', '#2ABABF', '#CDDC28', '#B91E8C'];
             var directions = ['+', '-'];
@@ -61,11 +66,78 @@
             // Start with an empty array of dots.
             var dots = [];
             var samples =[];
-            var numDots = 20;
+            var numDots = 6;
             var dotRadius = 18;
-                        //Initialise everything randomly apart quotes.
-                        for(var i = 0; i < numDots; i++) {
-                var x = Math.random() * 1800;
+
+             //Initialise THOUGHTS
+            var ppl_intro = ["Hey, I am half Romanian, half canadian, and before, I was an educator.",
+            "Hey, I am 29 years old, coming from India, and I was working in the food sector.",
+            "Hey, I am 43 years old, coming from south Africa.",
+            "Hey, I am from the US, and I was working on Mechanical Turk.",
+            "Hey, I am Indian, 32 years old, and I was an accountant.",
+            "Hey, I am 51 years old, I am coming from Kenya and I was a freelancer."
+        ];
+            var ppl_time = ["The first months, I spent mostly time thinking about myself, catching up on reading and friends, and discovering my city. Now, I am training children and adults without formal education to various new and interesting fields.",
+            "I am still looking for online income job, in Mechanical Turk, answering survey and stuff.",
+            "I am still working as an officice administrator, but I am also travelling much more.",
+            "I learned to take care of myself: I can now do things to imporve my wellbeing and my overall mental health.",
+            "Now, I am gardening, fishing, and I have this ongoing project for an innovative paper craft.",
+            "I am now working since a few years for a nonprofit, and travelling a lot still. Oh, I am a life-long learner too. "
+        ];
+            var ppl_yes = ["I think AI is great for the food industry, in terms of production, and waste, and for the environment. And now robots are also cleaning the trash, planting trees, and play the role of safety controllers, like along the roads.",
+            "Oh, I think AI is helping greatly in Education, the Medical sector, or for Wellness, but also for Transport or Communication, Shopping, and is filling our Smart Home.",
+            "I think AI is great for Corruption and fraud prevention, for the whole Industry sector, but also for the environment (both waare and energy optimisation)",
+            "I think AI is great for the Entertainment industry, for movies or game, or for shopping. Also, for Science or in the smart home.",
+            "I think AI helps the Agriculture and food industry but also design and architecture.",
+            "I think AI is great to boost Agriculture, Research and science, or to fight against fraud and corruption."
+        ];
+            var ppl_no = ["I do not support the use of AI for education -beyond an assistant or search engine kinda role-, as I dont think you can learn easily from someone you can't connect with easily. Same for intimacy, haha: I dont support it.",
+            "I think AI should be careful with what is food and agriculture-based: these stuff have to stay Nature-based.",
+            "I do not trust AI as a judge. I dont think AI would be able to judge as a human being, since nothing is black or white.",
+            "I am not supporting AI as soon as it involve a serious personal interaction. When you reach an hospital setting, you just want an intimate conversation with a human.",
+            "I would not use AI as caretaker, or for child care.",
+            "I think social work or companionship require the physical presence of a person, and should not be handed over AI."
+        ];
+            var ppl_I = ["I do use robots for my daily annoyances. Oh, they are great are making my morning coffee too. I also have an autonomous car, which is quite efficient.",
+            "I am using AI regularly for education purposes, and for electronics help.",
+            "AI is kinda my housekeeper.",
+            "AI is doing chores for me: putting my laundry, or doing the dishes",
+            "",
+            "I am everyday using AI to maintain my balcony garden - schedule watering, weeding, etc."
+        ];
+            var ppl_whatIf = ["What if AI could cook incredible food for me, like my grandma did.",
+            "What if AI could find new treatments for disease?",
+            "What if AI could clean and maintain our public spaces?",
+            "What if AI could find a way to police the apartment complex?",
+            "What if AI could automate all manual processes?",
+            "What if AI can alert community members when there are burglars in the neighborhood?"
+        ];
+            var ppl_hope = ["",
+            "I hope AI could be environmentally friendly -neither harm birds nor animals-, and not too addictive.",
+            "I hope AI would be used for assisting us in our lives, and not be a tool for more corruption or power domination by the wealthiest.",
+            "I hope AI could allows us to take care of ourselves more, not being dependent on pennies.",
+            "I hope AI could improve work efficienty.",
+            "I do hope technologies are used ethically."
+        ];
+            var ppl_fear = ["",
+            "I fear both security issues, and health side effects.",
+            "I fear there could be some losses in terms of job availibilities.",
+            "I do fear AI could become self-aware.",
+            "I fear AI could affect the environment",
+            "I fear some people may use technologies for nefarious purposes"
+        ];
+            var ppl_free = [[],
+            ["My advise ? Lets try not to depend too much on AI."],
+            ["My opinion ? With the right use, AI will only enrich our lives."],
+            [],
+            ["AI us natural intelligence displayed by human."],
+            []
+
+        ];
+   
+            //Initialise everything randomly apart quotes.
+            for(var i = 0; i < numDots; i++) {
+                var x = Math.random() * 1600;
                 var y = Math.random() * 800;
                 // Get random color, direction and speed.
                 var color = colors[Math.floor(Math.random() * colors.length)];
@@ -84,14 +156,41 @@
                     angle : angle,
                     color: color,
                     speed: speed,
-                    speedAngle: speedAngle
+                    speedAngle: speedAngle,
+                    id: i,  //identity number to see which are his thoughs etc.
+                    thoughts: []
                 };
+                dot.thoughts.push(ppl_intro[dot.id]);
+                dot.thoughts.push(ppl_time[dot.id]);
+                dot.thoughts.push(ppl_yes[dot.id]);
+                dot.thoughts.push(ppl_no[dot.id]);
+                dot.thoughts.push(ppl_I[dot.id]);
+                dot.thoughts.push(ppl_whatIf[dot.id]);
+                dot.thoughts.push(ppl_hope[dot.id]);
+                dot.thoughts.push(ppl_fear[dot.id]);
+                //For free, add after all elements of free for now only first if not empty !
+                if (ppl_free[dot.id] != [])
+                {if (ppl_free[dot.id].length>0) {
+                dot.thoughts.push(ppl_free[dot.id][0]);
+                }}
+               //dot.thoughts = cleanList(dot.thoughts);
                 // Save it to the dots array.
                 dots.push(dot);
                 var audio = new Audio('audio.wav');
                 samples.push(audio);
             }
 
+
+            function cleanList(LL) {
+              LLL= [];
+                for( i = 0; i < LL.length; i++ ) {
+                    if ((LL[i] != "") && (LL[i] != undefined)){
+                        LLL.push(LL[i]);
+                    }
+                    return LLL;
+    }
+}
+            
 
             function nearestDot(mX, mY) {
                 var indexD = 0;
@@ -111,6 +210,7 @@
                 mouseX = event.clientX - rect.left
                 mouseY = event.clientY - rect.top
                 talkDot = true;
+                talkTimer = timerMax;
                 index = nearestDot(mouseX, mouseY);
                 console.log("x: " + x + " y: " + y)
             }
@@ -121,8 +221,8 @@
                 getCursorPosition(canvas, e)
             })
 
-            var canvasWidth = 2000;
-            var canvasHeight = 1000;
+            var canvasWidth = 1800;
+            var canvasHeight = 900;
             var context = canvas.getContext("2d");
             context.fillStyle = "#0533f6";
             context.globalAlpha = 1;
@@ -144,7 +244,7 @@
             timer = timer + 1;
             if( timer % 10 == 1 ) {
             context.fillStyle = "#0533f6";
-            context.globalAlpha = 0.1;
+            context.globalAlpha = 0.05;
             context.fillRect(0, 0, canvasWidth, canvasHeight)
             //BOX with text
             context.globalAlpha = 1;
@@ -154,13 +254,14 @@
             context.font = "78px Londrina Outline";
             context.fillStyle = "#fff";
             context.textAlign = "left";
-            context.fillText("COMING SOON", 650, 400); 
+            context.fillText("COMING SOON", 650, 100); 
             context.font = "54px Londrina Outline";
             context.fillText("The Place", 60, 570); 
             context.font = "18px Inconsolata";
-            context.fillText("for plural visions", 60, 610); 
-            context.fillText("of technological futures.", 60, 640); 
-            context.fillText("Participative Experiment.", 60, 670);
+            context.fillText("for plural visions", 60, 605); 
+            context.fillText("of technological futures.", 60, 630); 
+            context.fillText("Participative Civic Experiment.", 60, 655);
+            context.fillText("...Somehow in 2050...", 60, 680); 
             context.font = "36px Londrina Outline";
             var txtJoin = "Collateral Commons";
             var linkJoin = "https://www.surveymonkey.de/r/WP99WPV";
@@ -195,14 +296,49 @@
             }
               // Possibly trigger the audio
               if (talkDot){
-                talkDot = false;
-                samples[nearDot].play();
-                context.strokeRect(dots[nearDot].x-10, dots[nearDot].y-10, 80, 80);
-                context.strokeStyle = "#fff"; //dot.color;
-                context.stroke();
+                talkTimer = talkTimer - 1; 
+                if (talkTimer < 1) { talkDot = false;
+                }
+                talkStep = Math.floor(talkTimer / timeStep);
+               // samples[nearDot].play();
+                //context.strokeRect(dots[nearDot].x-10, dots[nearDot].y-10, 80, 80);
+                //context.strokeStyle = "#fff"; //dot.color;
+                //context.stroke();
+                talkOne(nearDot, talkStep);
+                //talkAll(nearDot);
             }
             // Render it again
             window.requestAnimationFrame(moveDot);
+            }
+
+            function sleep(ms) {
+                return new Promise(resolve => setTimeout(resolve, ms));
+            }
+
+            function talkOne(ii, step) {
+                var dotThoughts = dots[ii].thoughts;
+                    context.globalAlpha = 1;
+                    context.font = "22px Inconsolata";
+                    context.textAlign = "center";
+                    context.fillStyle = "#ea361e";
+                    context.fillRect(0, 200, canvasWidth, 140);
+                    context.fillStyle = "#fff";
+                    context.fillText(dotThoughts[dotThoughts.length-step], 850, 270, 1600);  //because order step reversed!
+            }
+
+
+            async function talkAll(ii) {
+                var dotThoughts = dots[ii].thoughts;
+                for( j = 0; j < dotThoughts.length-1; j++ ) {    //for now remove free field !
+                    context.globalAlpha = 1;
+                    context.font = "28px Inconsolata";
+                    context.textAlign = "center";
+                    context.fillStyle = "#ea361e";
+                    context.fillRect(0, 200, canvasWidth, 200);
+                    context.fillStyle = "#fff";
+                    context.fillText(dotThoughts[j], 900, 300, 1600); 
+                   await sleep(timeStep);
+                }
             }
 
             function drawDot(dot) {
