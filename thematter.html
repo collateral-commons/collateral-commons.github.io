@@ -1,0 +1,281 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Collateral Commons &mdash; Visions</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="Plural visions on our technological futures" />
+	<meta name="keywords" content="technology, AI, collective, common good, utopia, vision, participative, speculative" />
+	<meta name="author" content="If AI" />
+
+
+
+  	<!-- Facebook and Twitter integration -->
+	<meta property="og:title" content=""/>
+	<meta property="og:image" content=""/>
+	<meta property="og:url" content=""/>
+	<meta property="og:site_name" content=""/>
+	<meta property="og:description" content=""/>
+	<meta name="twitter:title" content="" />
+	<meta name="twitter:image" content="" />
+	<meta name="twitter:url" content="" />
+	<meta name="twitter:card" content="" />
+
+	<!-- <link href="https://fonts.googleapis.com/css?family=Work+Sans:300,400,500,700,800" rel="stylesheet">	 -->
+	<link href="https://fonts.googleapis.com/css?family=Inconsolata:400,700" rel="stylesheet">
+
+	<!-- Animate.css -->
+	<link rel="stylesheet" href="css/animate.css">
+	<!-- Icomoon Icon Fonts-->
+	<link rel="stylesheet" href="css/icomoon.css">
+	<!-- Bootstrap  -->
+	<link rel="stylesheet" href="css/bootstrap.css">
+	<!-- Flexslider  -->
+	<link rel="stylesheet" href="css/flexslider.css">
+
+	<!-- Theme style  -->
+	<link rel="stylesheet" href="css/style.css">
+
+	<!-- Modernizr JS -->
+	<script src="js/modernizr-2.6.2.min.js"></script>
+	<!-- FOR IE9 below -->
+	<!--[if lt IE 9]>
+	<script src="js/respond.min.js"></script>
+	<![endif]-->
+
+
+
+<script>
+/* =======================================================
+*For writing and erasing textJAVASCRIPT, PUT it ELSEWHERE For writing and erasing text other way
+*
+* ======================================================= */
+
+var TxtRotate = function(el, toRotate, period) {
+  this.toRotate = toRotate;
+  this.el = el;
+  this.leng = this.toRotate.length;
+  this.loopNum = Math.floor(Math.random(this.leng));	//initialise randomly
+  this.period = parseInt(period, 10) || 2000;
+  this.txt = '';
+  this.tick();
+  this.isDeleting = false;
+};
+
+TxtRotate.prototype.tick = function() {
+  var i = this.loopNum % this.toRotate.length;
+  var fullTxt = this.toRotate[i];
+
+  if (this.isDeleting) {
+    this.txt = fullTxt.substring(0, this.txt.length - 1);
+  } else {
+    this.txt = fullTxt.substring(0, this.txt.length + 1);
+  }
+
+  this.el.innerHTML = '<span class="wrap">'+this.txt+'</span>';
+
+  var that = this;
+  var delta = 100 // - Math.random() * 100;
+
+  if (this.isDeleting) { delta /= 2; }
+
+  if (!this.isDeleting && this.txt === fullTxt) {
+    delta = this.period;
+    this.isDeleting = true;
+  } else if (this.isDeleting && this.txt === '') {
+    this.isDeleting = false;
+    this.loopNum++;
+    delta = 40;
+  }
+
+  setTimeout(function() {
+    that.tick();
+  }, delta);
+};
+
+window.onload = function() {
+  var elements = document.getElementsByClassName('txt-rotate');
+  for (var j=0; j<elements.length; j++) {
+    var k =  Math.floor(Math.random(elements.length));
+    var i = j + k % elements.length;
+    var toRotate = elements[i].getAttribute('data-rotate');
+    var period = elements[i].getAttribute('data-period');
+    if (toRotate) {
+      new TxtRotate(elements[i], JSON.parse(toRotate), period);
+    }
+  }
+  // INJECT CSS
+  var css = document.createElement("style");
+  css.type = "text/css";
+  css.innerHTML = ".txt-rotate > .wrap { border-right: 0.08em solid #666 }";
+  document.body.appendChild(css);
+};
+
+/* =======================================================
+*
+* ======================================================= */
+    </script>
+
+
+
+
+	</head>
+	<body>
+
+
+    <div class="fh5co-loader"></div>
+
+	<div id="page">
+            <nav class="fh5co-nav" role="navigation">
+                <div class="top-menu">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-xs-2">
+                                <div id="fh5co-logo"><a href="index.html">If AI<span>.</span></a></div>
+                            </div>
+                            <div class="col-xs-10 text-right menu-1">
+                                <ul>
+                                    <li><a href="index.html">Home</a></li>
+                                    <li class="active"><a href="thematter.html">The Matter</a></li>
+                                    <li><a href="theplace.html">The Place</a></li>
+                                    <li><a href="about.html">About</a></li>
+
+
+                                <!--	<li><a href="contact.html">Contact</a></li> -->
+                                </ul>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </nav>
+
+
+    <div class="display-tc js-fullheight animate-box" data-animate-effect="fadeIn">
+      <p><img style="width:100%; height:580px" src="images/im-1.jpg"></p>
+                                <h1>
+                                    <span
+                                        class="txt-rotate typewr"
+                                        data-period="10"
+                                        data-rotate='[ "What if it`s more like a symbiotic relationship?",
+                                        "Before AI solve something we need to solve ourself, our actions and impact on this planet.",
+                                        "Well, yes, AI can write email for you. But what about improving the human condition ?",
+                                        "Emotional support. Doesn`t it sounds like something that living things should do ?",
+                                        "What if AI could give back to humans, humans time? ",
+																				"I am afraid AI would make human inconsistent. ",
+                                        "It`s great for dangerous and alienating jobs, but also for jobs where the human can be wrong.",
+                                        "Seriously, it`s much more than a hairdresser now. It`s the social oasis around here.",
+                                        "For meaningful connections between people, your neighbour stay for me the first option.",
+                                        "Please AI, do whatever you want here, but please don`t cook for me.",
+																				"What if I say AI error rate would be better than human error rate? What does it mean?",
+                                        "Education, media and politics seems to me quite sad use of AI. ",
+																				"Did you say AI for balconies?",
+																			  "What if AI could help people understand each other?",
+                                        "AI should solve most of the practical demands of society while not influencig our way to experience the time.",
+                                        "I used to have a smart toothbrush.  It was tracking my gestures and speculating on my personality so well, it didn`t last long.",
+                                        "I ended up inventing myself a job since I couldn`t conceive a life without a job.",
+                                          "What if human can not handle it?",
+																					"Probably, I was afraid of loosing some sort of control and somehow meaning." ]'>
+                                      </span>
+                            </h1>
+
+                            <div class="box4">
+															<p style = "font-size:18px;text-align: justify;">
+																Here we present some collected materials of our ongoing research (through interviews, survey, or workshops) on how different individuals wish to see smart new technologies -and AI-
+																affecting their lifes. See the links and Text below. More coming soon.<br><br>
+																<div class="column4">
+
+													<a href="vtime.html">
+													<!--<img style="width:53%;padding-top: 58px;" src="images/runes1.png" hspace="40">-->
+													<p style="color:#ea361e;font-size:28px; margin-top: 16px;">.on time</p>
+													</a>
+
+													</div>
+													<div class="column4">
+
+													<a href="vyou.html">
+													<!--<img style="width:53%;padding-top: 58px;" src="images/runes2.png" hspace="40">-->
+													<p style="color:#ea361e;font-size:28px; margin-top: 16px;">.and you</p>
+													</a>
+
+													</div>
+													<div class="column4">
+
+													<a href="vgood.html">
+													<!--<img style="width:53%;padding-top: 58px;" src="images/runes3.png" hspace="40" >-->
+
+													<p style="color:#ea361e;font-size:28px; margin-top: 16px;">.for good</p>
+													</a>
+
+													</div>
+													<div class="column4">
+
+													<a href="vwithout.html">
+													<!--<img style="width:53%;padding-top: 58px;" src="images/runes4.png" hspace="40" >-->
+													<p style="color:#ea361e;font-size:28px; margin-top: 16px;">.without</p>
+													</a>
+
+													</div>
+
+
+																<b>Other examples of fears collected:</b><br>
+																'I am afraid of an ntrusion in the private life (data collection as with Facebook), loosing our privacy & freedom under an excuse of performance.'<br>
+                                 'This doubt that one day artificial intelligence can reveal itself and try to dominate humanity'.<br>
+																'I fear that AI technologies are applied in tasks that require critical thinking.'.<br>
+																'I worry that it could trigger an economic crisis as millions of jobs could disappear in a short period of time.'.<br>
+																'I am afraid that human can not handle it'.<br>
+															  'I fear AI will be a intransparent, unaccountable, suffocating layer between me and the world.'<br>
+																'I fear it might say something that will make others more angry at me because of the abusive ways of theirs. I fear one day it will fail safety-wise.'.<br>
+																'This idea that AI would participate to the extinction of all biological life'.<br>
+																'I am fearing the loss of control'.<br>
+																'They scare me. I feel they can be misused and used, among other things, to spy on us. But I am sure that they will be introduced so gradually that we will not even realize when it happened'. 		<br>
+																<br>
+																 	<b>Other Examples of hopes collected:</b><br>
+																	'I wish for a balance between AI and humans'.<br>
+																	'I hope I won't lose agency. That I will be able to understand it as much as humanly possible.'.<br>
+																	'I wished technologies were used ethically.'.<br>
+																	'I wish we become better people. Or create a better intelligence that then travels the stars and continues the "evolution"'.<br>
+																	'I hope AI could be something that allows us to take care of ourselves more. Not just be so dependent on pennies'.<br>
+																	'I hope that human know they limits'.<br>
+<br>
+																		<b>.Others collected:</b><br>
+												       		'I am sad to probably not live long enough to see AI everywhere'.<br>
+																		'Why do people think that finding a parking space in a city is a problem worthy of AI? why cant people imagine the beauty of a green city where busses would go where you like.'.<br>
+																		'What dull and repetitive tasks that could be done by an AI, do you actually enjoy doing yourself?'.<br>
+																		'To which extent are you willing to integrate technology at the price of your intimacy/freedom?'.<br>
+																			'Which control is possible?'.<br>
+																			'Its most important to break up business and data monopolies. Build open source systems. widespread coding and AI-readability is also important in my view. Not everything has to involve a digital layer and AI. Take a close look at incentives for AI applications; I dont just want a more efficient capitalism. Right now AI is just entrenching power monopolies, because the value of data grows exponentially with its amount, and the current AI boom is mainly fueled by data.'.<br>
+																			'Better try not to depend too much on AI'.<br>
+																			'It will be helpful but I know people will do some mistakes and that will result in some bad things happening like robots ruling us.'.<br>
+																				'Are we AIs ourselves? If they could reproduce without human intervention, would they be AIs? '.<br>
+
+
+
+</div>
+
+</div>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+
+<!-- jQuery -->
+<script src="js/jquery.min.js"></script>
+<!-- jQuery Easing -->
+<script src="js/jquery.easing.1.3.js"></script>
+<!-- Bootstrap -->
+<script src="js/bootstrap.min.js"></script>
+<!-- Waypoints -->
+<script src="js/jquery.waypoints.min.js"></script>
+<!-- Flexslider -->
+<script src="js/jquery.flexslider-min.js"></script>
+<!-- Main -->
+<script src="js/main.js"></script>
+
+</body>
+</html>

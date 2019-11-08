@@ -25,7 +25,7 @@
 	<!-- <link href="https://fonts.googleapis.com/css?family=Work+Sans:300,400,500,700,800" rel="stylesheet">	 -->
 	<link href="https://fonts.googleapis.com/css?family=Inconsolata:400,700" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Londrina+Outline&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Alfa+Slab+One&display=swap" rel="stylesheet"> 
+    <link href="https://fonts.googleapis.com/css?family=Alfa+Slab+One&display=swap" rel="stylesheet">
 	<!-- Animate.css -->
 	<link rel="stylesheet" href="css/animate.css">
 	<!-- Icomoon Icon Fonts-->
@@ -45,12 +45,12 @@
 	<script src="js/respond.min.js"></script>
 	<![endif]-->
 
-        
+
 
 
     <canvas id="myCanvas" width="2000" height="1000" style="border:1px solid #d3d3d3;">
             Your browser does not support the HTML5 canvas tag.</canvas>
-            
+
             <script>
             var mouseX = 0;
             var mouseY = 0;
@@ -134,7 +134,7 @@
             []
 
         ];
-   
+
             //Initialise everything randomly apart quotes.
             for(var i = 0; i < numDots; i++) {
                 var x = Math.random() * 1600;
@@ -190,7 +190,7 @@
                     return LLL;
     }
 }
-            
+
 
             function nearestDot(mX, mY) {
                 var indexD = 0;
@@ -225,6 +225,7 @@
             var canvasHeight = 900;
             var context = canvas.getContext("2d");
             context.fillStyle = "#0533f6";
+						context.font = "54px Londrina Outline";
             context.globalAlpha = 1;
             context.fillRect(0, 0, canvasWidth, canvasHeight)
             // Notice in the moveDot function we can make dots go faster if we increment by more than 1 pixel each time.
@@ -238,7 +239,7 @@
             }, 2500);
 
             var timer = 0;
-  
+
             function moveDot() {
 
             timer = timer + 1;
@@ -254,22 +255,22 @@
             context.font = "78px Londrina Outline";
             context.fillStyle = "#fff";
             context.textAlign = "left";
-            context.fillText("COMING SOON", 650, 100); 
+            context.fillText("COMING SOON", 650, 100);
             context.font = "54px Londrina Outline";
-            context.fillText("The Place", 60, 570); 
+            context.fillText("The Place", 60, 570);
             context.font = "18px Inconsolata";
-            context.fillText("for plural visions", 60, 605); 
-            context.fillText("of technological futures.", 60, 630); 
+            context.fillText("for plural visions", 60, 605);
+            context.fillText("of technological futures.", 60, 630);
             context.fillText("Participative Civic Experiment.", 60, 655);
-            context.fillText("...Somehow in 2050...", 60, 680); 
+            context.fillText("...Somehow in 2050...", 60, 680);
             context.font = "36px Londrina Outline";
             var txtJoin = "Collateral Commons";
             var linkJoin = "https://www.surveymonkey.de/r/WP99WPV";
-            context.fillText( txtJoin, 60, 750); 
+            context.fillText( txtJoin, 60, 750);
         }
             // Iterate over all the dots.
-            for( i = 0; i < dots.length; i++ ) {    
-                dots[i].angle = dots[i].angle + dots[i].speedAngle;  
+            for( i = 0; i < dots.length; i++ ) {
+                dots[i].angle = dots[i].angle + dots[i].speedAngle;
                 if( dots[i].xMove == '+' ) {
                 dots[i].x +=  Math.cos(dots[i].angle) * dots[i].speed + 0.1*Math.random();
                 } else {
@@ -296,7 +297,7 @@
             }
               // Possibly trigger the audio
               if (talkDot){
-                talkTimer = talkTimer - 1; 
+                talkTimer = talkTimer - 1;
                 if (talkTimer < 1) { talkDot = false;
                 }
                 talkStep = Math.floor(talkTimer / timeStep);
@@ -336,7 +337,7 @@
                     context.fillStyle = "#ea361e";
                     context.fillRect(0, 200, canvasWidth, 200);
                     context.fillStyle = "#fff";
-                    context.fillText(dotThoughts[j], 900, 300, 1600); 
+                    context.fillText(dotThoughts[j], 900, 300, 1600);
                    await sleep(timeStep);
                 }
             }
@@ -355,7 +356,7 @@
 
             }
             </script>
-            
+
 
 
 
@@ -380,7 +381,6 @@
                   <script src="js/jquery.flexslider-min.js"></script>
                   <!-- Main -->
                   <script src="js/main.js"></script>
-              
+
                   </body>
                   </html>
-                  
